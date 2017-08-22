@@ -1,0 +1,79 @@
+<template id="title-panel">
+  <style>
+    div {
+      border: 1px solid lightgray;
+      border-radius: 25px;
+      padding-left: 10px;
+      background-color: #fafafa;
+    }
+    h1 { color: green; }
+    h2 { color: lightgreen; }
+  </style>
+  <div>
+    <h1>default title</h1>                <!-- placeholder for the title -->
+    <h2>default subtitle/description</h2> <!-- placeholder for the subtitle/description -->
+  </div>
+</template>
+
+<script>
+customElements.define('title-panel', class extends HTMLElement {
+  // Can define constructor arguments if you wish.
+  constructor() {
+    // If you define a ctor, always call super() first!
+    // This is specific to CE and required by the spec.
+    super();
+
+    let shadowRoot = this.attachShadow({mode: 'open'});
+    const t = (document.currentScript ? document.currentScript.ownerDocument : document).querySelector('#title-panel');
+    const instance = t.content.cloneNode(true);
+    shadowRoot.appendChild(instance);
+
+    // Setup a click listener on <title-panel> itself.
+    this.addEventListener('click', e => {
+      console.log("Click!!")
+      // Don't toggle the title-panel if it's disabled.
+      if (this.disabled) {
+        return;
+      }
+      this.toggleDrawer();
+    });
+  }
+
+  // A getter/setter for an open property.
+  get open() {
+    return this.hasAttribute('open');
+  }
+
+  set open(val) {
+    // Reflect the value of the open property as an HTML attribute.
+    if (val) {
+      this.setAttribute('open', '');
+    } else {
+      this.removeAttribute('open');
+    }
+    this.toggleDrawer();
+  }
+
+  // A getter/setter for a disabled property.
+  get disabled() {
+    return this.hasAttribute('disabled');
+  }
+
+  set disabled(val) {
+    // Reflect the value of the disabled property as an HTML attribute.
+    if (val) {
+      this.setAttribute('disabled', '');
+    } else {
+      this.removeAttribute('disabled');
+    }
+  }
+
+  set title(val) {
+    console.log(val)
+  }
+
+  toggleDrawer() {
+    console.log("toggleDrawer method")
+  }
+});
+</script>

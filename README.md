@@ -21,7 +21,7 @@ And then, access to [http://localhost:2015](http://localhost:2015) with your fav
 
 ### example1
 
-This first example is a simple vanilla JS web component.
+This first example is a simple vanilla JS web component. 
 
 
 ## References
