@@ -1,0 +1,71 @@
+<template id="app-drawer">
+  <style>
+    p { color: red; }
+  </style>
+  <h1>Title</h1>
+  <h2>Subtitle</h2>
+</template>
+
+<script>
+customElements.define('app-drawer', class extends HTMLElement {
+
+  // Can define constructor arguments if you wish.
+  constructor() {
+    // If you define a ctor, always call super() first!
+    // This is specific to CE and required by the spec.
+    super();
+
+    let shadowRoot = this.attachShadow({mode: 'open'});
+    const t = (document.currentScript ? document.currentScript.ownerDocument : document).querySelector('#app-drawer');
+    const instance = t.content.cloneNode(true);
+    shadowRoot.appendChild(instance);
+
+    // Setup a click listener on <app-drawer> itself.
+    this.addEventListener('click', e => {
+      console.log("Click!!")
+      // Don't toggle the drawer if it's disabled.
+      if (this.disabled) {
+        return;
+      }
+      this.toggleDrawer();
+    });
+  }
+
+  // A getter/setter for an open property.
+  get open() {
+    return this.hasAttribute('open');
+  }
+
+  set open(val) {
+    // Reflect the value of the open property as an HTML attribute.
+    if (val) {
+      this.setAttribute('open', '');
+    } else {
+      this.removeAttribute('open');
+    }
+    this.toggleDrawer();
+  }
+
+  // A getter/setter for a disabled property.
+  get disabled() {
+    return this.hasAttribute('disabled');
+  }
+
+  set disabled(val) {
+    // Reflect the value of the disabled property as an HTML attribute.
+    if (val) {
+      this.setAttribute('disabled', '');
+    } else {
+      this.removeAttribute('disabled');
+    }
+  }
+
+  set title(val) {
+    console.log(val)
+  }
+
+  toggleDrawer() {
+    console.log("toggleDrawer method")
+  }
+});
+</script>
