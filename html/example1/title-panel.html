@@ -1,79 +1,91 @@
-<template id="title-panel">
+<template id=title-panel>
   <style>
-    div {
-      border: 1px solid lightgray;
-      border-radius: 25px;
-      padding-left: 10px;
-      background-color: #fafafa;
+    div#container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 122px;
+      border: 0;
+      border-radius: 6px;
+      padding: 0 60px 0 10px;
+      margin: 5px 0 5px 0;
+      background-color: #f2f3f4;
     }
-    h1 { color: green; }
-    h2 { color: lightgreen; }
+    div#container h1 {
+      font-family: Arial,sans-serif;
+      font-size: 28px;
+      color: #3c9700;
+      text-transform: lowercase;
+    }
+    div#container p {
+      font-family: Arial,sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      color: #555; 
+    }
   </style>
-  <div>
-    <h1>default title</h1>                <!-- placeholder for the title -->
-    <h2>default subtitle/description</h2> <!-- placeholder for the subtitle/description -->
+  <div id=container>
+    <content>
+      <h1></h1> <!-- placeholder for the title -->
+      <p></p>   <!-- placeholder for the subtitle/description -->
+    </content>
+    <img>
   </div>
 </template>
 
 <script>
 customElements.define('title-panel', class extends HTMLElement {
-  // Can define constructor arguments if you wish.
   constructor() {
     // If you define a ctor, always call super() first!
-    // This is specific to CE and required by the spec.
+    // This is specific to CustomElements and required by the spec.
     super();
 
-    let shadowRoot = this.attachShadow({mode: 'open'});
-    const t = (document.currentScript ? document.currentScript.ownerDocument : document).querySelector('#title-panel');
-    const instance = t.content.cloneNode(true);
-    shadowRoot.appendChild(instance);
-
-    // Setup a click listener on <title-panel> itself.
-    this.addEventListener('click', e => {
-      console.log("Click!!")
-      // Don't toggle the title-panel if it's disabled.
-      if (this.disabled) {
-        return;
-      }
-      this.toggleDrawer();
-    });
+    const template = (document.currentScript ? document.currentScript.ownerDocument : document).querySelector('#title-panel');
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  // A getter/setter for an open property.
-  get open() {
-    return this.hasAttribute('open');
-  }
-
-  set open(val) {
-    // Reflect the value of the open property as an HTML attribute.
-    if (val) {
-      this.setAttribute('open', '');
-    } else {
-      this.removeAttribute('open');
+  connectedCallback() {
+    if (!this.hasAttribute('title')) {
+      this.setAttribute('title', '')
     }
-    this.toggleDrawer();
-  }
-
-  // A getter/setter for a disabled property.
-  get disabled() {
-    return this.hasAttribute('disabled');
-  }
-
-  set disabled(val) {
-    // Reflect the value of the disabled property as an HTML attribute.
-    if (val) {
-      this.setAttribute('disabled', '');
-    } else {
-      this.removeAttribute('disabled');
+    if (!this.hasAttribute('subtitle')) {
+      this.setAttribute('subtitle', '')
     }
+    if (!this.hasAttribute('image')) {
+      this.setAttribute('image', '')
+    }
+    this.shadowRoot.querySelector("h1").innerText = this.title;
+    this.shadowRoot.querySelector("p").innerText  = this.subtitle;
+    this.shadowRoot.querySelector("img").src      = this.image;
+  }
+
+  get title() {
+    return this.getAttribute('title');
   }
 
   set title(val) {
-    console.log(val)
+    this.setAttribute('title', val);
+    this.shadowRoot.querySelector("h1").innerText = this.title;
   }
 
-  toggleDrawer() {
-    console.log("toggleDrawer method")
+  get subtitle() {
+    return this.getAttribute('subtitle');
+  }
+
+  set subtitle(val) {
+    this.setAttribute('subtitle', val);
+    this.shadowRoot.querySelector("p").innerText = this.subtitle;
+  }
+
+  get image() {
+    return this.getAttribute('image');
+  }
+
+  set image(img) {
+    this.setAttribute('image', img);
+    this.shadowRoot.querySelector("img").src = this.image;
   }
 });
 </script>
