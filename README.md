@@ -14,7 +14,9 @@ docker run -d \
     abiosoft/caddy
 ```
 
-And then, access to [http://localhost:2015](http://localhost:2015) with your favourite browser 
+or, if you are in Linux, you can simply execute ```./startserver``` script.
+
+One the server is up and running you can access to [http://localhost:2015](http://localhost:2015) with your favourite browser. 
 
 
 ## Examples
