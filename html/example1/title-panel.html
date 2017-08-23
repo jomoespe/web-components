@@ -1,31 +1,29 @@
-<template id=title-panel>
+<template id=title-panel-template>
   <style>
-    div#container {
+    div {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
       height: 122px;
-      border: 0;
       border-radius: 6px;
       padding: 0 60px 0 10px;
       margin: 5px 0 5px 0;
       background-color: #f2f3f4;
-    }
-    div#container h1 {
       font-family: Arial,sans-serif;
+    }
+    h1 {
       font-size: 28px;
-      color: #3c9700;
       text-transform: lowercase;
+      color: #3c9700;
     }
-    div#container p {
-      font-family: Arial,sans-serif;
+    p {
       font-size: 14px;
       font-weight: normal;
       color: #555; 
     }
   </style>
-  <div id=container>
+  <div>
     <content>
       <h1></h1> <!-- placeholder for the title -->
       <p></p>   <!-- placeholder for the subtitle/description -->
@@ -41,7 +39,7 @@ customElements.define('title-panel', class extends HTMLElement {
     // This is specific to CustomElements and required by the spec.
     super();
 
-    const template = (document.currentScript ? document.currentScript.ownerDocument : document).querySelector('#title-panel');
+    const template = (document.currentScript ? document.currentScript.ownerDocument : document).querySelector('#title-panel-template');
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
