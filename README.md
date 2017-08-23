@@ -45,6 +45,7 @@ Also this component have an API to interact with it.
 const title = document.querySelector("#titlePanel");
 
 ``` javascript
+
 titlePanel = document.querySelector("#myTitlePanel");
 
 console.log("The title is " + titlePanel.title)
