@@ -34,8 +34,11 @@
 
 <script>
 customElements.define('title-panel', class extends HTMLElement {
+  // Monitor the 'title','subtitle' and 'image' attributes for changes.
+  static get observedAttributes() { return ['title', 'subtitle', 'image']; }
+
   constructor() {
-    // If you define a ctor, always call super() first!
+    // If you define a constructor, always call super() first!
     // This is specific to CustomElements and required by the spec.
     super();
 
@@ -44,46 +47,27 @@ customElements.define('title-panel', class extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
-    if (!this.hasAttribute('title')) {
-      this.setAttribute('title', '')
+  attributeChangedCallback(attr, oldValue, newValue) {
+    switch (attr) {
+      case 'title': 
+        this.shadowRoot.querySelector("h1").innerText = newValue;  
+        break;
+      case 'subtitle': 
+        this.shadowRoot.querySelector("p").innerText = newValue;
+        break;
+      case 'image': 
+        this.shadowRoot.querySelector("img").src = newValue;
+        break;
     }
-    if (!this.hasAttribute('subtitle')) {
-      this.setAttribute('subtitle', '')
-    }
-    if (!this.hasAttribute('image')) {
-      this.setAttribute('image', '')
-    }
-    this.shadowRoot.querySelector("h1").innerText = this.title;
-    this.shadowRoot.querySelector("p").innerText  = this.subtitle;
-    this.shadowRoot.querySelector("img").src      = this.image;
   }
 
-  get title() {
-    return this.getAttribute('title');
-  }
+  set title(newValue) { this.setAttribute('title', newValue);  }
+  get title() { return this.getAttribute('title'); }
 
-  set title(val) {
-    this.setAttribute('title', val);
-    this.shadowRoot.querySelector("h1").innerText = this.title;
-  }
+  set subtitle(newValue) { this.setAttribute('subtitle', newValue); }
+  get subtitle() { return this.getAttribute('subtitle'); }
 
-  get subtitle() {
-    return this.getAttribute('subtitle');
-  }
-
-  set subtitle(val) {
-    this.setAttribute('subtitle', val);
-    this.shadowRoot.querySelector("p").innerText = this.subtitle;
-  }
-
-  get image() {
-    return this.getAttribute('image');
-  }
-
-  set image(img) {
-    this.setAttribute('image', img);
-    this.shadowRoot.querySelector("img").src = this.image;
-  }
+  set image(newValue) { this.setAttribute('image', newValue); }
+  get image() { return this.getAttribute('image'); }
 });
 </script>
