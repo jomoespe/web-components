@@ -50,7 +50,10 @@ customElements.define('title-panel', class extends HTMLElement {
   attributeChangedCallback(attr, oldValue, newValue) {
     switch (attr) {
       case 'title': 
-        this.shadowRoot.querySelector("h1").innerText = newValue;  
+        this.shadowRoot.querySelector("h1").innerText = newValue;
+        // firing a custom events
+        var event = new CustomEvent('titleChanged', { detail: {title: newValue}} );
+        this.dispatchEvent(event)
         break;
       case 'subtitle': 
         this.shadowRoot.querySelector("p").innerText = newValue;
