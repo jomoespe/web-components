@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<title>CustomElement example</title>    
+<script src=js/libs/webcomponentsjs/1.0.8/webcomponents-hi-sd-ce.js></script>
+<script src=js/components/product.js></script>
+<script src=js/components/hello.js></script>
+<link rel=stylesheet href=css/index.css>
+
+<section>
+    <p>If nothing appeared below, then your browser does not support Custom Elements yet.</p>
+
+    <!-- a web component (x-product)-->
+    <x-product 
+        data-name="Ruby" 
+        data-img="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4621/ruby.png" 
+        data-url="http://example.com/1"></x-product>
+    <x-product 
+        data-name="JavaScript" 
+        data-img="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4621/javascript.png" 
+        data-url="http://example.com/2"></x-product>
+    <x-product 
+        data-name="Python" 
+        data-img="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4621/python.png" 
+        data-url="http://example.com/3"></x-product>
+
+    <!-- anohter webcomponent (hello-element) -->
+    <hello-element name="jomoespe"></hello-element>
+</section>
+</html>
