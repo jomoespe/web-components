@@ -5,20 +5,21 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      height: 122px;
-      border-radius: 6px;
-      padding: 0 60px 0 10px;
-      margin: 5px 0 5px 0;
+      height: 8rem;
+      border-radius: 0.3rem;
+      padding: 0 5rem 0 1rem;
+      margin: 0.5rem 0 0.5rem 0;
       background-color: #f2f3f4;
       font-family: Arial,sans-serif;
     }
     h1 {
-      font-size: 28px;
-      text-transform: lowercase;
+      font-size: 2rem;
+      font-weight: bold;
       color: #3c9700;
+      text-transform: lowercase;
     }
     p {
-      font-size: 14px;
+      font-size: 1.2rem;
       font-weight: normal;
       color: #555; 
     }
@@ -41,7 +42,6 @@ customElements.define('title-panel', class extends HTMLElement {
     // If you define a constructor, always call super() first!
     // This is specific to CustomElements and required by the spec.
     super();
-
     const template = (document.currentScript ? document.currentScript.ownerDocument : document).querySelector('#title-panel-template');
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -65,7 +65,7 @@ customElements.define('title-panel', class extends HTMLElement {
     // firing a custom events
     var event = new CustomEvent('attributeChanged', { detail: { attr: attr, 
                                                                 oldValue: oldValue, 
-                                                                newValue: newValue }} );
+                                                                newValue: newValue } });
     this.dispatchEvent(event)
     return;
   }
