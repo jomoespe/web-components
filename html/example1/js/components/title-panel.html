@@ -34,7 +34,7 @@
 
 <script>
 customElements.define('title-panel', class extends HTMLElement {
-  // Monitor the 'title','subtitle' and 'image' attributes for changes.
+  // Monitor the attributes for changes.
   static get observedAttributes() { return ['title', 'subtitle', 'image']; }
 
   constructor() {
@@ -48,12 +48,12 @@ customElements.define('title-panel', class extends HTMLElement {
   }
 
   attributeChangedCallback(attr, oldValue, newValue) {
+    if(oldValue===newValue) {
+        return;
+    }
     switch (attr) {
       case 'title': 
         this.shadowRoot.querySelector("h1").innerText = newValue;
-        // firing a custom events
-        var event = new CustomEvent('titleChanged', { detail: {title: newValue}} );
-        this.dispatchEvent(event)
         break;
       case 'subtitle': 
         this.shadowRoot.querySelector("p").innerText = newValue;
@@ -62,6 +62,12 @@ customElements.define('title-panel', class extends HTMLElement {
         this.shadowRoot.querySelector("img").src = newValue;
         break;
     }
+    // firing a custom events
+    var event = new CustomEvent('attributeChanged', { detail: { attr: attr, 
+                                                                oldValue: oldValue, 
+                                                                newValue: newValue }} );
+    this.dispatchEvent(event)
+    return;
   }
 
   set title(newValue) { this.setAttribute('title', newValue);  }
