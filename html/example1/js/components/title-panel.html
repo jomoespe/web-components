@@ -12,22 +12,39 @@
       background-color: #f2f3f4;
       font-family: Arial,sans-serif;
     }
+
     h1 {
       font-size: 2rem;
       font-weight: bold;
       color: #3c9700;
       text-transform: lowercase;
     }
+
     h2 {
       font-size: 1.2rem;
       font-weight: normal;
       color: #555; 
+      transition: .5s ease-in-out;
+    }
+
+    img {
+      transition: .5s ease-in-out;
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        opacity: 0;
+      }
+
+      img {
+        opacity: 0;
+      }
     }
   </style>
   <header>
     <hgroup>
       <h1></h1> <!-- placeholder for the title -->
-      <h2></h2>   <!-- placeholder for the subtitle/description -->
+      <h2></h2> <!-- placeholder for the subtitle/description -->
     </hgroup>
     <img>
   </header>
@@ -42,7 +59,8 @@ customElements.define('title-panel', class extends HTMLElement {
     // If you define a constructor, always call super() first!
     // This is specific to CustomElements and required by the spec.
     super();
-    const template = (document.currentScript ? document.currentScript.ownerDocument : document).querySelector('#title-panel-template');
+    var doc = document.currentScript ? document.currentScript.ownerDocument : document;
+    const template = doc.querySelector('#title-panel-template');
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
