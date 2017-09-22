@@ -40,7 +40,7 @@ This first example is a simple vanilla JS web component.
 
 This component is a title panel composed of a title a subtitle and an image.
 
-``` html
+```html
 <!-- importing the component -->
 <link rel=import href=title-panel.html>
 
@@ -54,7 +54,7 @@ This component is a title panel composed of a title a subtitle and an image.
 Also this component have an API to interact with it.
 
 
-``` javascript
+```javascript
 titlePanel = document.querySelector("#myTitlePanel");
 
 console.log("The title is " + titlePanel.title)
