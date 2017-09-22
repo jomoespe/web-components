@@ -21,7 +21,7 @@ $ make run
 Or start the docker container: 
 
 ```bash
-docker run -d \
+$ docker run -d \
     -v $PWD/html:/srv \
     -p 2015:2015 \
     abiosoft/caddy
