@@ -2,6 +2,9 @@
 <style>
   * {
     --color-main: #ADD969;
+    --color-background: transparent;
+    --color-select: lightgray;
+    --color-select-open: gray;
   }
 
   div.searchbar {
@@ -25,7 +28,7 @@
   div.searchbar select {
     flex-grow: 1;
     border-radius: 4px 0 0 4px;
-    background: lightgray url(arrow-down.svg) no-repeat right;
+    background: var(--color-select) url(arrow-down.svg) no-repeat right;
     background-size:  15px 15px;
     padding-right: 10px;
     appearance: none;
@@ -34,8 +37,8 @@
     min-width: 60px;
     width: content;
   }
-  div.searchbar select:hover {
-    background-color: gray;
+  div.searchbar select option {
+    background-color: var(--color-select-open);
   }
 
   div.searchbar input {
@@ -55,12 +58,29 @@
     max-width: 60px;
   }
 </style>
-
+<script>
+    const minCharsToStartSearch = 3;
+    // bind component events
+    window.addEventListener('load', event => { 
+        document.querySelector("#q").addEventListener('input', event => { 
+            // https://stackoverflow.com/questions/11810874/how-to-get-an-input-text-value-in-javascript
+            if (event.target.value.length >= minCharsToStartSearch) {
+                let domain = document.querySelector("#d");
+                console.log('here we should start looking up for elements of type {', 
+                            domain.options[domain.selectedIndex].value, 
+                            '} and like {', 
+                            event.target.value,
+                            '}');
+            }
+        });
+        console.log('registered key pressed');
+    });
+</script>
 <html>
   <form action=index.html>
     <div class=searchbar>
       <!-- ¿Meter el select en un div e ir ajustando el tamaño de este?  -->
-      <select name=d>
+      <select name=d id=d>
         <option value=all>All</option>
         <option value=dogs>Dogs</option>
         <option value=cat>Cats</option>
@@ -70,7 +90,7 @@
         <option value=horse>Horses</option>
         <option value=vet>Veterinary and Specialist Food</option>
       </select>
-      <input type=text name=q />
+      <input type=text id=q name=q />
       <button>Search</button>
     </div>
   </form>
