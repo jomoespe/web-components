@@ -1,0 +1,94 @@
+<script>
+customElements.define('jm-conversation', class extends HTMLElement {
+  static get observedAttributes() { return ['id', 'title']; }
+
+  constructor() {
+    super();
+
+    var p = document.createElement('p');
+    p.innerHTML = '<span>' + this.getAttribute('title') + '</span>';
+
+    var conversation = document.createElement('section');
+    conversation.appendChild(p);
+
+    var comments = document.createElement('slot');
+
+    var shadow = this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(p);
+    this.shadowRoot.appendChild(comments);
+  }
+
+  attributeChangedCallback(attr, oldValue, newValue) {
+    if(oldValue===newValue) {
+        return;
+    }
+    switch (attr) {
+      case 'id': 
+        break;
+      case 'title': 
+        break;
+    }
+    return;
+  }
+});
+
+
+customElements.define('jm-comment', class extends HTMLElement {
+  static get observedAttributes() { return ['from']; }
+
+  constructor() {
+    super();
+
+    var comment = document.createElement('p');
+    comment.className = 'text';
+    comment.appendChild(document.createElement('slot'));
+
+    var author = document.createElement('span');
+    author.className = 'from';
+    author.innerText = this.getAttribute('from')
+
+    var commentHolder = document.createElement('div');
+    commentHolder.className = 'comment';
+    commentHolder.appendChild(author);
+    commentHolder.appendChild(comment);
+
+    var shadow = this.attachShadow({mode: 'open'});
+    this.shadowRoot.innerHTML = `
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
+    .comment {
+      padding: 1rem;
+      display:block;
+    }
+    .author {
+      font-style: italic;
+      color: red;
+    }
+    .text {
+      position: relative;
+      display: inline;
+      border: solid 1px lightgray;
+      border-radius: 1em;
+      padding: 0.5rem 1rem;
+      margin-left: 1.5rem;
+      background-color: lightgray;
+      font-family: 'Shadows Into Light', cursive;
+      color: #0431B4;
+      font-size: 16pt;
+    }
+    .text:after {
+      display: block;
+      position: absolute;
+      content: '';
+      border: solid 1px pink;
+      bottom: 13px;
+      left: -14px;
+      border-width: 10px 15px 10px 0px;
+
+      border-color: transparent lightgray;
+    }
+    </style>`;
+    this.shadowRoot.appendChild(commentHolder);
+  }
+});
+</script>
