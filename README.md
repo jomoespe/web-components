@@ -69,3 +69,4 @@ titlePanel.image = "path/to/new-image.png";
 
   - [Custom Elements](https://developers.google.com/web/fundamentals/architecture/building-components/customelements)
   - [Template tag in MDN](https://developer.mozilla.org/es/docs/Web/HTML/Elemento/template)
+  - [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom)
