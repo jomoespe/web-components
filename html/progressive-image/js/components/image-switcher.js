@@ -1,38 +1,41 @@
 customElements.define('progressive-image', class extends HTMLElement {
     static get observedAttributes() { return ['preload', 'src']; }
 
-    constructor() {
-        super();
-    }
+    constructor() { super(); }
 
     connectedCallback() {
-        var preloadImage = this.createImage(100);
-        if (this.getAttribute('preload')) {
-            preloadImage.src = this.getAttribute('preload');
-        }
-        
-        var image = this.createImage(0);
-        image.src = this.getAttribute('src');
-        image.onload = () => {
-            preloadImage.style.opacity = 0;
-            image.style.opacity = 100;
-        }
-        
-        var holder = this.createHolder();
-
-        var shadow = this.attachShadow({mode: 'open'});
-        holder.appendChild(preloadImage);
-        holder.appendChild(image);
-        shadow.appendChild(holder);
-
-        if(this.getAttribute("alt")) {
-            image.alt = this.getAttribute("alt");
-        } else {
-            console.warn("No alt attribute for id %s", this.getAttribute('id'));
-        }
+        this.preload = this.createPreload();
+        this.image   = this.createImage();
+        this.holder  = this.createHolder();
+        this.holder.appendChild(this.preload);
+        this.holder.appendChild(this.image);
+        this.shadow = this.attachShadow({mode: 'open'});
+        this.shadow.appendChild(this.holder);
     }
 
-    createImage(opacity) {
+    showImage() {
+        this.preload.style.opacity = 0;
+        this.image.style.opacity = 100;
+    }
+
+    createPreload() {
+        var image = this.createBaseImage();
+        image.style.opacity = '100';
+        image.src = this.getAttribute('preload');
+        image.style.visibility = this.hasAttribute('preload') ? 'visible' : 'hidden';
+        return image;
+    }
+
+    createImage() {
+        var image = this.createBaseImage();
+        image.style.opacity = 0;
+        image.src = this.getAttribute('src');
+        image.alt = this.getAttribute("alt");
+        image.onload = () => this.showImage();
+        return image;
+    }
+
+    createBaseImage() {
         var image = new Image();
         image.style.position = 'absolute';
         image.style.left = 0;
@@ -40,7 +43,6 @@ customElements.define('progressive-image', class extends HTMLElement {
         image.style.height = '100%';
         image.style.objectFit = 'scale-down';
         image.style.transition = 'opacity 1s ease-in-out';
-        image.style.opacity = opacity;
         return image;
     }
 
