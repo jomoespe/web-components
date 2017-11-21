@@ -1,5 +1,5 @@
 customElements.define('progressive-image', class extends HTMLElement {
-    static get observedAttributes() { return ['preload', 'image']; }
+    static get observedAttributes() { return ['preload', 'src']; }
 
     constructor() {
         super();
@@ -12,7 +12,7 @@ customElements.define('progressive-image', class extends HTMLElement {
         }
         
         var image = this.createImage(0);
-        image.src = this.getAttribute('image');
+        image.src = this.getAttribute('src');
         image.onload = () => {
             preloadImage.style.opacity = 0;
             image.style.opacity = 100;
@@ -33,7 +33,7 @@ customElements.define('progressive-image', class extends HTMLElement {
     }
 
     createImage(opacity) {
-         var image = new Image();
+        var image = new Image();
         image.style.position = 'absolute';
         image.style.left = 0;
         image.style.width = '100%';
