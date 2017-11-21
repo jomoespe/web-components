@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<title>image-switcher tag</title>    
+<script src=js/libs/webcomponentsjs/1.0.8/webcomponents-hi-sd-ce.js></script>
+<script src=js/components/image-switcher.js></script>
+<link rel=stylesheet href=css/index.css>
+<h1>progressive image example</h1>
+<section>
+    <h2>Preload and image</h2>
+    <progressive-image id=image1 
+        preload=images/ClownFish.jpg 
+        image=images/Summit.jpg>
+    </progressive-image>
+
+    <h2>Preload and external image</h2>
+    <progressive-image id=image2 
+        preload=images/ClownFish.jpg 
+        image=https://i.pinimg.com/originals/3c/a7/27/3ca727818de66ae034d151a4ae4588ee.jpg>
+    </progressive-image>
+
+    <h2>Whithout preload image</h2>
+    <progressive-image id=image3 
+        alt="Without preload" 
+        image=images/Summit.jpg>
+    </progressive-image>
+</section>
+</html>
