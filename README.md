@@ -2,13 +2,11 @@
 
 This projects contains a set of projects relates to Web Components. The main goal is learning web components.
 
-
 ## Requisites
 
 - Make
 - Docker
 - A modern browser
-
 
 ## How to run
 
