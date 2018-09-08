@@ -5,9 +5,9 @@ This projects contains a set of projects relates to Web Components. The main goa
 
 ## Requisites
 
-  - Make
-  - Docker
-  - A modern browser
+- Make
+- Docker
+- A modern browser
 
 
 ## How to run
@@ -15,20 +15,19 @@ This projects contains a set of projects relates to Web Components. The main goa
 You can simply run:
 
 ```bash
-$ make run
+make run
 ```
 
 Or start the docker container: 
 
 ```bash
-$ docker run -d \
+docker run -d \
     -v $PWD/html:/srv \
     -p 2015:2015 \
     abiosoft/caddy
 ```
 
 One the server is up and running you can access to [http://localhost:2015](http://localhost:2015) with your favourite browser. 
-
 
 ## Examples
 
@@ -53,7 +52,6 @@ This component is a title panel composed of a title a subtitle and an image.
 
 Also this component have an API to interact with it.
 
-
 ```javascript
 titlePanel = document.querySelector("#myTitlePanel");
 
@@ -64,9 +62,9 @@ titlePanel.subtitle = "New subtitle";
 titlePanel.image = "path/to/new-image.png";
 ```
 
-
 ## References
 
-  - [Custom Elements](https://developers.google.com/web/fundamentals/architecture/building-components/customelements)
-  - [Template tag in MDN](https://developer.mozilla.org/es/docs/Web/HTML/Elemento/template)
-  - [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom)
+- [Custom Elements](https://developers.google.com/web/fundamentals/architecture/building-components/customelements)
+- [Template tag in MDN](https://developer.mozilla.org/es/docs/Web/HTML/Elemento/template)
+- [Shadow DOM v1: Self-Contained Web Components](https://developers.google.com/web/fundamentals/web-components/shadowdom)
+- [Creating and triggering events](https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events)
