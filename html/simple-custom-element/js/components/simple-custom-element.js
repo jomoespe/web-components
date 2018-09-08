@@ -23,7 +23,6 @@
 class SimpleCustomElement extends HTMLElement {
   static get observedAttributes() { return ['name']; }   // attributes monitord for changes?.
 
-
   /* ***********************************************************************
    *  Custom element Lifecycle hooks/listeners
    * *********************************************************************** */
@@ -78,7 +77,6 @@ class SimpleCustomElement extends HTMLElement {
         break;
     }
   }
-
 
   /* ***********************************************************************
    *  The component Javascript API
