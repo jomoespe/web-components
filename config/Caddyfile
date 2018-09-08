@@ -1,0 +1,5 @@
+localhost:80, localhost:443 {
+    browse
+    gzip
+    tls self_signed
+}
