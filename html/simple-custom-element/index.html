@@ -1,10 +1,14 @@
 <!doctype html>
-<html>
+<html lang="en">
 <title>Simple Custom Element example</title>    
-<script src=js/libs/webcomponentsjs/1.0.8/webcomponents-hi-sd-ce.js></script> <!-- polyfill --> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="Description" content="simple-custom-eleemnt tag example page">
+<script src=https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js></script> <!-- polyfill -->
 <script src=js/components/simple-custom-element.js async ></script>
+<script src=js/index.js async ></script>
 <section>
   <!-- using the simple-custom-element -->
-  <simple-custom-element name=World></simple-custom-element>
+  <simple-custom-element id=simple name="my friend"></simple-custom-element>
+  <button>Click it!</button>
 </section>
 </html>
