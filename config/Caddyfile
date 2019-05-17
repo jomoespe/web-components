@@ -1,5 +1,5 @@
 localhost:80 {
-    redir https://localhost:443/{uri} 307
+    redir /{uri} https://localhost:443/{uri} 307
 }
 localhost:443 {
     browse
