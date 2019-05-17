@@ -15,10 +15,13 @@
  *   - Shadow DOM
  *   - Custom events 
  * 
+ * Also is adding some accesible attributes using AOM, [Accesibility Object Model](https://github.com/wicg/aom)
+ * 
  * A detailed explanation can be found about,
  *   - Custom elements: https://developers.google.com/web/fundamentals/web-components/customelements
  *   - Shadow DOM: https://developers.google.com/web/fundamentals/web-components/shadowdom
  *   - Custom Events: https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+ *   - Accesibility Object Model:  https://robdodson.me/the-future-of-accessibility-for-custom-elements/
  */
 class SimpleCustomElement extends HTMLElement {
   static get observedAttributes() { return ['name']; }   // attributes monitord for changes?.
@@ -40,6 +43,10 @@ class SimpleCustomElement extends HTMLElement {
     //  create an 'h1' element and attach to shadow DOM 
     this.h1 = document.createElement('h1');
     this.h1.textContent = "Hello World"
+
+    //  add accesible attributes
+    this.accessibleNode.role = 'label';
+    this.accessibleNode.textContent = this.h1.textContent;
 
     this.shadowRoot.appendChild(this.h1)
   }
@@ -69,6 +76,8 @@ class SimpleCustomElement extends HTMLElement {
     switch(attr) {
       case 'name':
         this.h1.textContent = `Hello ${newVal}`;
+        this.accessibleNode.textContent = this.h1.textContent;  // setup accesible attributes
+
         // Fire a custom event. When the name attribute change a 'nameChanged' event will be fired
         var event = new CustomEvent('nameChanged', { detail: { attr: attr, 
                                                                oldValue: oldVal, 
