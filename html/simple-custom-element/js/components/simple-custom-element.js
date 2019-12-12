@@ -44,10 +44,6 @@ class SimpleCustomElement extends HTMLElement {
     this.h1 = document.createElement('h1');
     this.h1.textContent = "Hello World"
 
-    //  add accesible attributes
-    this.accessibleNode.role = 'label';
-    this.accessibleNode.textContent = this.h1.textContent;
-
     this.shadowRoot.appendChild(this.h1)
   }
 
@@ -76,7 +72,6 @@ class SimpleCustomElement extends HTMLElement {
     switch(attr) {
       case 'name':
         this.h1.textContent = `Hello ${newVal}`;
-        this.accessibleNode.textContent = this.h1.textContent;  // setup accesible attributes
 
         // Fire a custom event. When the name attribute change a 'nameChanged' event will be fired
         var event = new CustomEvent('nameChanged', { detail: { attr: attr, 
