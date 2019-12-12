@@ -1,8 +1,4 @@
-localhost:80 {
-    redir /{uri} https://localhost:443/{uri} 307
-}
-localhost:443 {
+:80 {
     browse
     gzip
-    tls self_signed
 }
